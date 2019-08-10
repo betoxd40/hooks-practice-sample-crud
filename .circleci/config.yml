@@ -15,6 +15,9 @@ jobs:
           paths: ./node_modules
   notify_job_status:
     description: Send webhook to Telegram BOT about job status
+    build:
+      docker:
+        - image: circleci/node:11.0
     steps:
       - run:
           name: On success
