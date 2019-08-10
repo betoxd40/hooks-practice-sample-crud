@@ -13,4 +13,25 @@ jobs:
       - save_cache: # special step to save the dependency cache
           key: dependency-cache-{{ checksum "package.json" }}
           paths: ./node_modules
-     
+  notify_job_status:
+    description: Send webhook to Telegram BOT about job status
+    steps:
+      - run:
+          name: On success
+          when: on_success
+          command: |
+            curl https://localhost:5000/notification -d '{"payload":{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'","branch":"'"$CIRCLE_BRANCH"'","build_parameters":{"CIRCLE_JOB":"'"$CIRCLE_JOB"'"},"outcome":"fixed","build_url":"'"$CIRCLE_BUILD_URL"'"}}' -H "Content-Type: application/json" -X POST --fail
+      - run:
+          name: On fail
+          when: on_fail
+          command: |
+            curl https://localhost:5000/notification -d '{"payload":{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'","branch":"'"$CIRCLE_BRANCH"'","build_parameters":{"CIRCLE_JOB":"'"$CIRCLE_JOB"'"},"outcome":"failed","build_url":"'"$CIRCLE_BUILD_URL"'"}}' -H "Content-Type: application/json" -X POST --fail
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - notify_job_status:
+          requires:
+            - build
