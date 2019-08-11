@@ -19,7 +19,7 @@ jobs:
           name: On success
           when: on_success
           command: |
-            curl https://stark-badlands-85096.herokuapp.com/notification -d '{"payload":{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "username":"'"$CIRCLE_PR_USERNAME"'", "branch":"'"$CIRCLE_BRANCH"'", build_url":"'"$CIRCLE_BUILD_URL"'", "status":"succeed"}}' -H "Content-Type: application/json" -X POST --fail
+            curl https://stark-badlands-85096.herokuapp.com/notification -d '{"payload":{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "username":"'"$CIRCLE_PR_USERNAME"'", "branch":"'"$CIRCLE_BRANCH"'", "build_url":"'"$CIRCLE_BUILD_URL"'", "status":"succeed"}}' -H "Content-Type: application/json" -X POST --fail
       - run:
           name: On fail
           when: on_fail
