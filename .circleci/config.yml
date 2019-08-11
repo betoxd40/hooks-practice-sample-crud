@@ -11,7 +11,7 @@ jobs:
           name: Setup Dependencies
           command: yarn install
   notify_job_status:
-    description: Send webhook to Telegram BOT about job status
+    description: Send webhook to Telegram BOT about job statuss
     docker:
       - image: circleci/node:11.0
     steps:
