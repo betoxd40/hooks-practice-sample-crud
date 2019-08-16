@@ -19,12 +19,12 @@ jobs:
           name: On success
           when: on_success
           command: |
-            curl https://telegram-bot-phinx.herokuapp.com/notification -d '{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "branch":"'"$CIRCLE_BRANCH"'", "build_url":"'"$CIRCLE_BUILD_URL"'", "status":"succeed"}' -H "Content-Type: application/json" -X POST --fail
+            curl https://telegram-bot-phinx.herokuapp.com/notification -d '{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "branch":"'"$CIRCLE_BRANCH"'", "build_url":"'"$CIRCLE_BUILD_URL"'", "status":"succeed", "project":"kikker-dashboard"}' -H "Content-Type: application/json" -X POST --fail
       - run:
           name: On fail
           when: on_fail
           command: |
-            curl https://telegram-bot-phinx.herokuapp.com/notification -d '{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "branch":"'"$CIRCLE_BRANCH"'", "build_url":"'"$CIRCLE_BUILD_URL"'", "status":"failed"}' -H "Content-Type: application/json" -X POST --fail
+            curl https://telegram-bot-phinx.herokuapp.com/notification -d '{"reponame":"'"$CIRCLE_PROJECT_REPONAME"'", "repourl":"'"$CIRCLE_REPOSITORY_URL"'", "branch":"'"$CIRCLE_BRANCH"'", "build_url":"'"$CIRCLE_BUILD_URL"'", "status":"failed", "project":"kikker-dashboard"}' -H "Content-Type: application/json" -X POST --fail
 
 workflows:
   version: 2
